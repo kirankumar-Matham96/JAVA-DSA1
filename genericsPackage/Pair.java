@@ -9,6 +9,9 @@ public class Pair<T> {
         this.second = second;
     }
 
+    public Pair(){
+    }
+
     public T getFirst() {
         return first;
     }
@@ -19,6 +22,10 @@ public class Pair<T> {
 
     public void setFirst(T first) {
         this.first = first;
+    }
+
+    public void print(){
+        System.out.println(this.first + "  " + this.second);
     }
 
     public void setSecond(T second) {
