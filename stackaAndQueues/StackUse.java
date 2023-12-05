@@ -2,7 +2,7 @@ package stackaAndQueues;
 
 public class StackUse {
     public static void main(String[] args) throws StackEmptyException, StackFullException, StackOutOfBoundsException {
-        StacksImitation stack = new StacksImitation(2);
+        StacksUsingArrays stack = new StacksUsingArrays(2);
 
         stack.push(2);
 //        System.out.println("stack is empty? : "+stack.isEmpty());

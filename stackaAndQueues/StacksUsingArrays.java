@@ -1,17 +1,17 @@
 package stackaAndQueues;
 
-public class StacksImitation {
+public class StacksUsingArrays {
 
     private int[] stackData;
     private int topElement;
     private int topIndex;
 
-    public StacksImitation(){
+    public StacksUsingArrays(){
         stackData = new int[2];
         topElement = -1;
         topIndex = 0;
     }
-    public StacksImitation(int stackSize){
+    public StacksUsingArrays(int stackSize){
         stackData = new int[stackSize];
         topElement = -1;
         topIndex = 0;
