@@ -25,50 +25,63 @@ public class QueuesUsingArrays {
         return size == 0;
     }
 
-    public void enqueue(int element) throws QueueFullException {
-//        if(size == 0){
-//            frontEnd = element;
-//            rearEnd = element;
-//        }else{
-//            rearEnd = element;
-//        }
-//
-//        data[size] = element;
-//        size++;
+    private void doubleCapacity() {
+        int temp[] = data;
+        data = new int[2 * temp.length];
+
+        int index = 0;
+        for(int i = frontEnd; i < temp.length; i++){
+            data[index++] = temp[i];
+        }
+
+        for(int i = 0; i < frontEnd - 1; i++){
+            data[index++] = temp[i];
+        }
+
+        frontEnd = 0;
+        rearEnd = temp.length - 1;
+    }
+
+    public void enqueue(int element) {
 
         if(size == data.length) {
-            throw new QueueFullException();
+//            throw new QueueFullException();
+            doubleCapacity();
         }
 
         if(size == 0){
-            frontEnd++;
+            frontEnd = 0;
         }
-        rearEnd++;
+
+//        rearEnd++;
+
+        // if the array has space
+//        if(rearEnd == data.length){
+//            rearEnd =0;
+//            // this is circular queue behavior
+//        }
+
+        // optimized way
+        rearEnd = (rearEnd + 1) % data.length;
+
         data[rearEnd] = element;
         size++;
     }
 
     public int dequeue() throws QueueEmptyException{
-//        int[] newData = new int[data.length];
-//
-//        for(int i = 0; i < data.length-1; i++){
-//            newData[i] = data[i+1];
-//        }
-//        data = newData;
-//        frontEnd = data[0];
-//        if(size > 0){
-//            size--;
-//        }
-//        if(size == 0){
-//            rearEnd = -1;
-//        }
-
         if(size == 0){
             // throw an exception
             throw new QueueEmptyException();
         }
         int temp = data[frontEnd];
         frontEnd++;
+        // normal way
+//        if(frontEnd == data.length){
+//            frontEnd = 0;
+//        }
+
+        // alternate way (optimized)
+        frontEnd = (frontEnd + 1) % data.length;
         size--;
 
         if(size == 0){
