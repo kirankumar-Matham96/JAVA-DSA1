@@ -1,8 +1,59 @@
 package Trees;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class BinaryTreeUse {
+
+    public static BinaryTreeNode<Integer> takeTreeInputLevelVise(String message) {
+        Queue<BinaryTreeNode<Integer>> pendingQueue = new LinkedList<>();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(message);
+        int rootData = sc.nextInt();
+        if(rootData == -1){
+            return null;
+        }
+
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootData);
+
+        pendingQueue.add(root);
+
+
+        while(!pendingQueue.isEmpty()){
+            BinaryTreeNode<Integer> front = pendingQueue.poll();
+            System.out.println("Enter left data for node "+ front.data);
+            int left = sc.nextInt();
+            if(left != -1){
+                BinaryTreeNode<Integer> rootLeft = new BinaryTreeNode<>(left);
+                front.left = rootLeft;
+                pendingQueue.add(rootLeft);
+
+            }
+
+            System.out.println("Enter right data for node "+ front.data);
+            int right = sc.nextInt();
+            if(right != -1){
+                BinaryTreeNode<Integer> rootRight = new BinaryTreeNode<>(right);
+                front.right = rootRight;
+                pendingQueue.add(rootRight);
+
+            }
+        }
+        return root;
+    }
+
+    public static int numberOfNodes(BinaryTreeNode<Integer> root) {
+        if(root == null){
+            return 0;
+        }
+
+        int leftNodesCount = numberOfNodes(root.left);
+        int rightNodesCount = numberOfNodes(root.right);
+
+        return leftNodesCount + rightNodesCount + 1;
+    }
     public static BinaryTreeNode<Integer> takeTreeInput(String message) {
         System.out.println(message);
         Scanner sc = new Scanner(System.in);
@@ -66,7 +117,11 @@ public class BinaryTreeUse {
 //
 //        printTreeDetailed(root);
 
-        printTreeDetailed(takeTreeInput("Enter the root data"));
+//        BinaryTreeNode<Integer> root = takeTreeInput("Enter the root data");
+        BinaryTreeNode<Integer> root = takeTreeInputLevelVise("Enter the root");
+        printTreeDetailed(root);
+        System.out.println();
+        System.out.println("nodes => "+numberOfNodes(root));
 
     }
 }
