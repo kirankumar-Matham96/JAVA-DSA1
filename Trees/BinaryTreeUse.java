@@ -9,16 +9,34 @@ import java.util.Scanner;
 
 public class BinaryTreeUse {
 
-//    public static BalancedTreeReturn isBalancedImprovedVersion(BinaryTreeNode<Integer> root) {
-//        if(root == null){
-//            int height = 0;
-//            boolean isBalanced = true;
-//            BalancedTreeReturn ans = new BalancedTreeReturn();
-//            ans.height = height;
-//            ans.isBalanced = isBal;
-//            return ans;
-//        }
-//    }
+    public static BalanceTreeReturn isBalancedImproved(BinaryTreeNode<Integer> root) {
+        if(root == null){
+            int height = 0;
+            boolean isBal = true;
+            BalanceTreeReturn ans = new BalanceTreeReturn();
+            ans.height = height;
+            ans.isBalanced = isBal;
+            return ans;
+        }
+
+        BalanceTreeReturn leftOutput = isBalancedImproved(root.left);
+        BalanceTreeReturn rightOutput = isBalancedImproved(root.right);
+        boolean isBal = true;
+        int height = 1+ Math.max(leftOutput.height,rightOutput.height);
+        if(Math.abs(leftOutput.height - rightOutput.height) > 1){
+            isBal = false;
+        }
+
+        if(!leftOutput.isBalanced || !rightOutput.isBalanced){
+            isBal = false;
+        }
+
+        BalanceTreeReturn ans = new BalanceTreeReturn();
+
+        ans.height = height;
+        ans.isBalanced = isBal;
+        return ans;
+    }
 
     public static int height(BinaryTreeNode<Integer> root) {
         if(root == null){
