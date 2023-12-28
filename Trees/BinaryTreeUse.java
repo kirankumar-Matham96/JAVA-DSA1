@@ -419,5 +419,6 @@ public class BinaryTreeUse {
         printTreeLevelWise(root);
 
         System.out.println("Is balanced => "+isBalanced(root));
+
     }
 }

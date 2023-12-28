@@ -7,7 +7,7 @@ import java.util.Queue;
 
 public class BuildingTreeUsingInOrderAndPreOrder {
 
-    public static BinaryTreeNode<Integer> buildTreeUsingPostInOrderHelper(int[] inOrder, int[] preOrder, int startIndexPre, int endIndexPre, int startIndexIn, int endIndexIn) {
+//    public static BinaryTreeNode<Integer> buildTreeUsingPostInOrderHelper(int[] inOrder, int[] preOrder, int startIndexPre, int endIndexPre, int startIndexIn, int endIndexIn) {
 // find the steps...
 
         //        if(startIndexPre > endIndexPre){
@@ -44,7 +44,7 @@ public class BuildingTreeUsingInOrderAndPreOrder {
 //        root.right = buildTreeUsingPreInOrderHelper(inOrder, preOrder, rightStartIndexPre, rightEndIndexPre, rightStartIndexIn, rightEndIndexIn);
 //
 //        return root;
-    }
+//    }
 
     public static BinaryTreeNode<Integer> buildTreeUsingPreInOrderHelper(int[] inOrder, int[] preOrder, int startIndexPre, int endIndexPre, int startIndexIn, int endIndexIn) {
         if(startIndexPre > endIndexPre){
@@ -88,10 +88,10 @@ public class BuildingTreeUsingInOrderAndPreOrder {
         return root;
     }
 
-    public static BinaryTreeNode<Integer> buildTreeUsingPostInOrder(int[] inOrder, int[] postOrder) {
-        BinaryTreeNode<Integer> root = buildTreeUsingPostInOrderHelper(inOrder, postOrder, 0, postOrder.length-1, 0, inOrder.length-1);
-        return root;
-    }
+//    public static BinaryTreeNode<Integer> buildTreeUsingPostInOrder(int[] inOrder, int[] postOrder) {
+//        BinaryTreeNode<Integer> root = buildTreeUsingPostInOrderHelper(inOrder, postOrder, 0, postOrder.length-1, 0, inOrder.length-1);
+//        return root;
+//    }
 
     public static void printTreeLevelWise(BinaryTreeNode<Integer> root) {
         if(root == null){
