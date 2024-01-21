@@ -19,7 +19,7 @@ public class PriorityQueueUse {
             }
         }
 
-        System.out.println("For min Priority");
+        System.out.println("For max Priority");
         // max priorityQueue
         MaxPriorityQueuesClass<String> pqMax = new MaxPriorityQueuesClass<>();
         pqMax.insert("a", 15);
