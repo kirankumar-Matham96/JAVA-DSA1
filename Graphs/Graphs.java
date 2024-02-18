@@ -20,25 +20,6 @@ public class Graphs {
         depthFirstTraversal(adjMatrix, 0, visited);
     }
 
-    public static void bfTraversal(int adjMatrix[][]){
-        Queue<Integer> pendingVertices = new LinkedList<>();
-        boolean visited[] = new boolean[adjMatrix. length];
-        visited[0] = true;
-        pendingVertices.add(0);
-
-        while(! pendingVertices.isEmpty()){
-            int currentVertex = pendingVertices.poll();
-            System.out.print(currentVertex +" ");
-            for(int i = 0; i < adjMatrix.length; i++){
-                if(adjMatrix[currentVertex][i] == 1 && !visited[i]){
-// i is unvisited neighbor of currentVertex
-                    pendingVertices.add(i);
-                    visited[i] = true;
-                }
-            }
-        }
-    }
-
     public static void breadthFirstTraversal(int[][] adjMatrix) {
         Queue<Integer> pendingVertices = new LinkedList<>();
 
@@ -65,6 +46,48 @@ public class Graphs {
 
     }
 
+    public static ArrayList<Integer> getPathBFS(int adjMatrix[][], int s, int e) {
+        Queue<Integer> pendingVertices = new LinkedList<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        boolean[] visited = new boolean[adjMatrix.length];
+        visited[s] = true;
+        pendingVertices.add(s);
+        map.put(s, -1);
+        boolean pathFound = false;
+
+        // traveling through all the vertices
+        while(!pendingVertices.isEmpty()){
+            int currentVertex = pendingVertices.poll();
+            // traverse over all the neighbours
+            for (int i = 0; i < adjMatrix.length; i++) {
+                if(adjMatrix[currentVertex][i] == 1 && !visited[i]){
+                    pendingVertices.add(i);
+                    visited[i] = true;
+                    map.put(i, currentVertex);
+
+                    if(i == e){
+                        // path found
+                        pathFound = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if(pathFound){
+            ArrayList<Integer> path = new ArrayList<>();
+            int currentVertex = e;
+            while(currentVertex != -1){
+                path.add(currentVertex);
+                int parent = map.get(currentVertex);
+                currentVertex = parent;
+            }
+            return path;
+        }else{
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -87,7 +110,15 @@ public class Graphs {
 //        }
 
 //        depthFirstTraversal(adjMatrix);
-        breadthFirstTraversal(adjMatrix);
+//        breadthFirstTraversal(adjMatrix);
 //        bfTraversal(adjMatrix);
+
+        int sourceVertex = sc.nextInt();
+        int end = sc.nextInt();
+        ArrayList<Integer> path = getPathBFS(adjMatrix, sourceVertex,end);
+
+        for (Integer i: path){
+            System.out.print(i+" ");
+        }
     }
 }
